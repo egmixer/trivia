@@ -47,11 +47,15 @@ def create_app(test_config=None):
     @app.route('/categories')
     def get_categories():
         categories = Category.query.all()
-        formatted_categories = [category.format() for category in categories]
+
+        categories_dict = {}
+        for category in categories:
+            categories_dict[category.id] = category.type
+
         return jsonify({
             "success": True,
-            "categories": formatted_categories,
-            "total_categories": len(formatted_categories)
+            "categories": categories_dict,
+            "total_categories": len(categories_dict)
         })
 
     #todo4
@@ -101,7 +105,12 @@ def create_app(test_config=None):
         if 'search_term' in body.keys():
             questions = Question.query.filter(Question.question.ilike('%'+body['search_term']+'%')).all()
             formatted_questions = [question.format() for question in questions]
-            return jsonify(formatted_questions)
+
+            
+            return jsonify({
+                "questions": formatted_questions,
+                "total_questions": len(formatted_questions),
+            })
         #todo5
         try: 
             question = Question(
@@ -134,17 +143,13 @@ def create_app(test_config=None):
         if 'previous_questions' in body.keys():
             previous_questions = body['previous_questions']
 
-        question = Question.query.filter(Question.id.notin_(previous_questions), Question.category == body['category']).first()
+        question = Question.query.filter(Question.id.notin_(previous_questions), Question.category == body['category']['id']).first()
         formatted_question = question.format() if question != None else None
 
         return jsonify({
             "success": True,
             "question": formatted_question 
         })
-
-
-
-
     
     #todo9
     @app.errorhandler(400)

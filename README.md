@@ -7,4 +7,5 @@ The project is devided into two folders, frontend and backend
 ````
 /backend
 /frontend
+
 ```

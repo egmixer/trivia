@@ -288,7 +288,33 @@ Response is
 ````
 
 
+### POST '/quiz'
+- Gets 1 question per request
+- Will fetch questions based on Category id and Previous questions
+- Fetches questions that is not in the Previous questions array
+- Example for POST request on http://127.0.0.1:5000/quiz with Body
+```
+{
+    "previous_questions": [],
+    "category": {
+        "id" : 0
+    }
+}
+```
+Response : 
 
+```
+{
+    "question": {
+        "answer": "Brazil",
+        "category": 6,
+        "difficulty": 3,
+        "id": 10,
+        "question": "Which is the only team to play in every soccer World Cup tournament?"
+    },
+    "success": true
+}
+```
 
 ## Testing
 To run the tests, run

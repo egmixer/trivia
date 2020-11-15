@@ -84,6 +84,7 @@ GET '/questions'
 - URI : http://127.0.0.1:5000/questions
 - Example response : 
 
+
 ```
 {
     "categories": {
@@ -172,7 +173,120 @@ GET '/questions'
 ```
 
 
+GET '/categories/{id}/questions'
+- Fetches all questions in a specific category identified by {id} paginated 10 questions per page
+- Success status in boolean value
+- Total number of questions in this category
+- Category id
+- Example response for URI http://127.0.0.1:5000/categories/2/questions : 
 
+```
+{
+    "current_category": "Art",
+    "questions": [
+        {
+            "answer": "Escher",
+            "category": 2,
+            "difficulty": 1,
+            "id": 16,
+            "question": "Which Dutch graphic artist–initials M C was a creator of optical illusions?"
+        },
+        {
+            "answer": "Mona Lisa",
+            "category": 2,
+            "difficulty": 3,
+            "id": 17,
+            "question": "La Giaconda is better known as what?"
+        },
+        {
+            "answer": "One",
+            "category": 2,
+            "difficulty": 4,
+            "id": 18,
+            "question": "How many paintings did Van Gogh sell in his lifetime?"
+        },
+        {
+            "answer": "Jackson Pollock",
+            "category": 2,
+            "difficulty": 2,
+            "id": 19,
+            "question": "Which American artist was a pioneer of Abstract Expressionism, and a leading exponent of action painting?"
+        }
+    ],
+    "success": true,
+    "total_questions": 4
+}
+```
+
+
+DELETE '/questions/{id}'
+- Deletes question by id
+- Example response for DELETE request on http://127.0.0.1:5000/questions/24 : 
+
+```
+{
+    "deleted": 24,
+    "success": true
+}
+```
+
+POST '/questions'
+- Based on values passes in "Body" it'll give a response
+- If a "search_term" is passed
+
+- example on POST request sent to http://127.0.0.1:5000/questions with 
+
+Body
+```
+{
+    "search_term": "Country"
+}
+```
+Response will be: 
+
+```
+{
+    "questions": [
+        {
+            "answer": "Uruguay",
+            "category": 6,
+            "difficulty": 4,
+            "id": 11,
+            "question": "Which country won the first ever soccer World Cup in 1930?"
+        }
+    ],
+    "total_questions": 1
+}
+```
+- Response to "search_term" contains an array of questions has text values that matches the search_term value, and total number of questions
+
+----
+
+- If a Question, Answer, Difficulty, Category are passed
+- Will insert new question in the database
+- Example to POST request on http://127.0.0.1:5000/questions
+with Body
+```
+{
+    "question": "What is the capital of England",
+    "answer": "London",
+    "difficulty": "2",
+    "category": 1
+} 
+```
+Response is
+```
+{
+    "created": {
+        "answer": "London",
+        "category": 1,
+        "difficulty": 2,
+        "id": 52,
+        "question": "What is the capital of England"
+    },
+    "success": true
+}
+````
 
 
 

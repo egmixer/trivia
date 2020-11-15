@@ -137,12 +137,22 @@ def create_app(test_config=None):
         body = request.get_json()
 
         if body == None or 'category' not in body.keys():
-            return abort(422)
+            abort(422)
+        
+        
 
         previous_questions = []
         if 'previous_questions' in body.keys():
             previous_questions = body['previous_questions']
 
+        if body['category']['id'] == 0:
+            question = Question.query.filter(Question.id.notin_(previous_questions)).first()
+            formatted_question = question.format() if question != None else None            
+            return jsonify({
+                "success": True,
+                "question": formatted_question 
+            })
+            
         question = Question.query.filter(Question.id.notin_(previous_questions), Question.category == body['category']['id']).first()
         formatted_question = question.format() if question != None else None
 

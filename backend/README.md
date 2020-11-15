@@ -54,7 +54,7 @@ Setting the `FLASK_APP` variable to `flaskr` directs flask to use the `flaskr` d
 
 ## API endpoints
 
-GET '/categories'
+### GET '/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs, success status in boolean value, and total number of categories.
@@ -76,7 +76,7 @@ GET '/categories'
 }
 ```
 
-GET '/questions'
+### GET '/questions'
 - Fetches all questions paginated 10 questions per page
 - Success status in boolean value
 - Total number of questions in the database
@@ -173,7 +173,7 @@ GET '/questions'
 ```
 
 
-GET '/categories/{id}/questions'
+### GET '/categories/{id}/questions'
 - Fetches all questions in a specific category identified by {id} paginated 10 questions per page
 - Success status in boolean value
 - Total number of questions in this category
@@ -219,7 +219,7 @@ GET '/categories/{id}/questions'
 ```
 
 
-DELETE '/questions/{id}'
+### DELETE '/questions/{id}'
 - Deletes question by id
 - Example response for DELETE request on http://127.0.0.1:5000/questions/24 : 
 
@@ -260,7 +260,6 @@ Response will be:
 ```
 - Response to "search_term" contains an array of questions has text values that matches the search_term value, and total number of questions
 
-----
 
 - If a Question, Answer, Difficulty, Category are passed
 - Will insert new question in the database
